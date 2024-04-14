@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('attached/', views.testGetIbGE, name='testGetIbGE'),
+    path('ibge/', views.IBGE_get_research, name='IBGEGetResearch'),
 ]
 
 
