@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} Dashboard {% endblock %}
+{% block title %} Dashboard - IBGE {% endblock %}
 
 {% block content %}
 
@@ -9,15 +9,21 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-3">Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a
-                jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-                unique.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+            <div class="col-sm">
+                <div class="form-group">
+                    <h3 class="display-3" for="research"><b>Researchs</b></h3>
+                    <select class="newform-control" id="researchSelectId" name='research'>
+                    <option value="" selected="">-------</option>
+                        {% for research in researchs %}
+                            <option value='{{ research.ibge_id }}'>{{ research.research_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container">
+    {% comment %} <div class="container">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">
@@ -45,7 +51,7 @@
 
         <hr>
 
-    </div> <!-- /container -->
+    </div> <!-- /container --> {% endcomment %}
 
 </main>
 

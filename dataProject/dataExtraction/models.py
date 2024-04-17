@@ -2,22 +2,20 @@ from django.db import models
 import json
 
 
-class IBGEParentAttached(models.Model):
-    ibge_id = models.CharField(max_length=2, blank=False)
-    name = models.CharField(max_length=255)
+class IBGEResearch(models.Model):
+    ibge_id = models.CharField(max_length=2)
+    research_name = models.CharField(max_length=255)
     
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
     
-    def __dict__(self):
-        return {'id': self.ibge_id, 'name': self.name}
     
 class IBGEChildAttached(models.Model):
-    parent = models.ForeignKey(IBGEParentAttached, on_delete=models.CASCADE, related_name='child_aggregated')
+    parent = models.ForeignKey(IBGEResearch, on_delete=models.CASCADE, related_name='child_aggregated')
     aggregate_id = models.IntegerField(blank=False)
-    aggregate_name = models.CharField(max_length=500)
-    url = models.CharField(max_length=255)
-    subject = models.CharField(max_length=255)
+    aggregate_name = models.CharField(max_length=700)
+    url = models.CharField(max_length=255, null=True)
+    subject = models.CharField(max_length=255, null=True)
     frequency_choices = [
         ('P1', 'Anual'),
         ('P8', 'Semestral'),
@@ -25,12 +23,15 @@ class IBGEChildAttached(models.Model):
         ('P5', 'Mensal'),
         ('P13', 'Trimestral móvel')
     ]
-    frequency = models.CharField(max_length=5, choices=frequency_choices)
-    start_freq = models.PositiveIntegerField()
-    end_freq = models.PositiveIntegerField()
+    frequency = models.CharField(max_length=5, choices=frequency_choices, null=True)
+    start_freq = models.PositiveIntegerField(null=True)
+    end_freq = models.PositiveIntegerField(null=True)
     territorial_level = models.ManyToManyField('IBGETerritorialLevel')
     variables = models.ManyToManyField('IBGEVariables')
     classifications = models.ManyToManyField('IBGEClassifications')
+    
+    def __str__(self) -> str:
+        return self.aggregate_name
     
 class IBGETerritorialLevel(models.Model):
     territorial_id = models.CharField(max_length=10)
