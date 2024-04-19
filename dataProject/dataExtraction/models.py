@@ -7,7 +7,7 @@ class IBGEResearch(models.Model):
     research_name = models.CharField(max_length=255)
     
     def __str__(self):
-        return self.name
+        return self.research_name
     
     
 class IBGEChildAttached(models.Model):
@@ -26,19 +26,19 @@ class IBGEChildAttached(models.Model):
     frequency = models.CharField(max_length=5, choices=frequency_choices, null=True)
     start_freq = models.PositiveIntegerField(null=True)
     end_freq = models.PositiveIntegerField(null=True)
-    territorial_level = models.ManyToManyField('IBGETerritorialLevel')
+    # territorial_level = models.ManyToManyField('IBGETerritorialLevel')
     variables = models.ManyToManyField('IBGEVariables')
     classifications = models.ManyToManyField('IBGEClassifications')
     
     def __str__(self) -> str:
         return self.aggregate_name
     
-class IBGETerritorialLevel(models.Model):
-    territorial_id = models.CharField(max_length=10)
-    territorial_name = models.CharField(max_length=100)
+# class IBGETerritorialLevel(models.Model):
+#     territorial_id = models.CharField(max_length=10)
+#     territorial_name = models.CharField(max_length=100)
     
-    def __str__(self) -> str:
-        return self.territorial_name
+#     def __str__(self) -> str:
+#         return self.territorial_name
     
 class IBGEVariables(models.Model):
     var_id = models.IntegerField()

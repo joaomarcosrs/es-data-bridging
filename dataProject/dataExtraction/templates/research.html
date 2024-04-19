@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} Dashboard - IBGE {% endblock %}
+
+{% block content %}
+
+<main role="main">
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h3 class="display-5" for="research"><b>Researchs</b></h3>
+            </div>
+        </div>    
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <select class="newform-control" id="researchSelectId" name='research' style="font-size:18px;">
+                    <option value="" selected="">-------</option>
+                        {% for research in researchs %}
+                            <option value="{{ research.ibge_id }}">{{ research.research_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                {% include "research_partials/aggregated.html" %}
+                {% block aggregated %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}
