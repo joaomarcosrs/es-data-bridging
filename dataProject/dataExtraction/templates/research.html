@@ -30,8 +30,19 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                {% include "research_partials/aggregated.html" %}
-                {% block aggregated %}
+                <div class="row mt-4" id="aggregateResultContainer">
+                    <div class="form-group">
+                        <select class="newform-control" id="aggregateSelectId" name='aggregate' style="font-size:18px; max-width: 500px;">
+                        <option value="" selected="">-------</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                {% include "research_partials/metadata.html" %}
+                {% block metadata %}
                 {% endblock %}
             </div>
         </div>
